@@ -1,1 +1,1 @@
-# cinenote-client
+# CineNote Client

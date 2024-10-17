@@ -21,8 +21,8 @@ export default function HomePage({
             enthusiasts to create personalized addresses for their favorite
             films. Users can create an account and add movies to their unique
             address by providing the movie&#39;s title, description, and
-            runtime. This platform provides a unique way to catalog and share
-            your movie collection with others.
+            runtime. This app provides a simple way to catalog and save your
+            movie collection.
           </p>
           {successfulMessage && (
             <p className="successful-message">{successfulMessage}</p>

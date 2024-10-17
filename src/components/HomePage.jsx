@@ -38,6 +38,8 @@ export default function HomePage({
           <Register
             baseURL={baseURL}
             setSuccessfulMessage={setSuccessfulMessage}
+            setToken={setToken}
+            setUserInfo={setUserInfo}
           />
         </div>
       </div>

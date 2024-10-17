@@ -1,9 +1,37 @@
 import { useState } from "react";
 
-export default function Register({ baseURL, setSuccessfulMessage }) {
+export default function Register({
+  baseURL,
+  setSuccessfulMessage,
+  setToken,
+  setUserInfo,
+}) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
+  function login() {
+    fetch(`${baseURL}/user/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && !data.error) {
+          setToken(data.token);
+          localStorage.setItem("jwt", data.token);
+
+          setUserInfo(data.userInfo);
+          localStorage.removeItem("userInfo");
+          localStorage.setItem("userInfo", JSON.stringify(data.userInfo));
+
+          setError("");
+        } else {
+          setError(data.error);
+        }
+      });
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,6 +48,7 @@ export default function Register({ baseURL, setSuccessfulMessage }) {
           setUsername("");
           setPassword("");
           setSuccessfulMessage(data.message);
+          login();
         } else {
           setSuccessfulMessage("");
           setError(data.error);
